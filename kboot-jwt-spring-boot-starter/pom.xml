@@ -19,6 +19,7 @@
 		<kotlin.version>1.4.21</kotlin.version>
 		<jjwt.version>0.9.1</jjwt.version>
 		<!-- Test -->
+		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<hamkrest.version>1.8.0.1</hamkrest.version>
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 	</properties>
@@ -160,6 +161,27 @@
 					<execution>
 						<goals>
 							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- jacoco -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
