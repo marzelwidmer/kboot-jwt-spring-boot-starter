@@ -1,4 +1,4 @@
-# Kotlin Spring Boot Starter for JWT validation ![CI](https://github.com/marzelwidmer/kboot-jwt-spring-boot-starter/workflows/CI/badge.svg) 
+# Kotlin Spring Boot Starter for JWT validation ![MasterCI](https://github.com/marzelwidmer/kboot-jwt-spring-boot-starter/workflows/MasterCI/badge.svg)
 
 ## application.yaml
 ```yaml
