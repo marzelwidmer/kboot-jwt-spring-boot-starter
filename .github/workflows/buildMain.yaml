@@ -1,9 +1,7 @@
 name: MasterCI
 on:
   push:
-    branches:
-      - master
-      - main
+    branches: [ master ]
 jobs:
   BuildMain :
     runs-on: ubuntu-latest

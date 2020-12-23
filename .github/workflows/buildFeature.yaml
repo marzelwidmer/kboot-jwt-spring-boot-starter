@@ -1,8 +1,11 @@
 name: FeatureCI
 on:
   push:
-    branches:
-      - '*'
+    # Sequence of patterns matched against refs/heads
+    branches-ignore:
+      # Push events to branches matching refs/heads/mona/octocat
+      - 'master'
+      - 'main'
 
 jobs:
   BuildFeature :
