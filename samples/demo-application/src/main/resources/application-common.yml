@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+    restart:
+      enabled: true
+    info:
+      enabled: true
+  info:
+    git:
+      mode: full
+
+security:
+  jwt:
+    issuer: Keepcalm Auth
+    audience: Keepcalm
+    secret: s3cretP@ssw0rd
