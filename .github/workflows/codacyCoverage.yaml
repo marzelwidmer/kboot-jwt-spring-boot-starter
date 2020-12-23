@@ -1,14 +1,14 @@
-name: codacy-coverage-reporter
+name: Codacy Analysis CLI
 
 on: ["push"]
 
 jobs:
-  codacy-coverage-reporter:
+  codacy-analysis-cli:
+    name: Codacy Analysis CLI
     runs-on: ubuntu-latest
-    name: codacy-coverage-reporter
     steps:
-      - uses: actions/checkout@master
-      - name: Run codacy-coverage-reporter
-        uses: codacy/codacy-coverage-reporter-action@master
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - name: Run Codacy Analysis CLI
+        uses: codacy/codacy-analysis-cli-action@master
