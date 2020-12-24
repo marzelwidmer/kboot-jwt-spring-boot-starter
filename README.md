@@ -1,4 +1,5 @@
-# Kotlin Spring Boot Starter for JWT validation ![MasterCI](https://github.com/marzelwidmer/kboot-jwt-spring-boot-starter/workflows/MasterCI/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=marzelwidmer_kboot-jwt-spring-boot-starter&metric=alert_status)](https://sonarcloud.io/dashboard?id=marzelwidmer_kboot-jwt-spring-boot-starter)
+# Kotlin Spring Boot Starter for JWT validation
+![MasterCI](https://github.com/marzelwidmer/kboot-jwt-spring-boot-starter/workflows/MasterCI/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=marzelwidmer_kboot-jwt-spring-boot-starter&metric=alert_status)](https://sonarcloud.io/dashboard?id=marzelwidmer_kboot-jwt-spring-boot-starter)
 
 ## application.yaml
 ```yaml
