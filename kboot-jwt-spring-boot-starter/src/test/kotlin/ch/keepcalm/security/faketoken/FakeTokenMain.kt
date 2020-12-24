@@ -1,3 +1,4 @@
+@file:JvmName("FakeTokenMain")
 package ch.keepcalm.security.faketoken
 
 fun main() {

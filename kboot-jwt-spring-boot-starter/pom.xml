@@ -31,15 +31,9 @@
 		<surefire.version>2.22.2</surefire.version>
 		<checkstyle.version>3.0.0</checkstyle.version>
 		<code.coverage.exclusions>
-			**/*Bean.java,
-			**/*DTO.java,
-			**/*Request.java,
-			**/*Response.java,
-			**/*Configuration.java,
-			**/ch/keepcalm/foo/bar/**/*,
-			**/ch/keepcalm/foo/baz/**/*,
-			**/ch/qiminfo/librairy/config/**/*,
-			**/ch/qiminfo/librairy/db/**/*
+			**/*Test.java,
+			**/*FakeTokenMain.java,
+			**/ch/keepcalm/security/faketoken/**/*
 		</code.coverage.exclusions>
 		<aggregate.report.dir>target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
 	</properties>
