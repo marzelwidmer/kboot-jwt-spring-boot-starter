@@ -18,12 +18,30 @@
 		<java.version>11</java.version>
 		<kotlin.version>1.4.21</kotlin.version>
 		<jjwt.version>0.9.1</jjwt.version>
-		<!-- Test -->
-<!--		<sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>-->
 
-		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+		<!-- Test -->
 		<hamkrest.version>1.8.0.1</hamkrest.version>
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+
+
+		<!-- plugins -->
+		<sonar.version>3.6.0.1398</sonar.version>
+		<jacoco.version>0.8.6</jacoco.version>
+
+		<surefire.version>2.22.2</surefire.version>
+		<checkstyle.version>3.0.0</checkstyle.version>
+		<code.coverage.exclusions>
+			**/*Bean.java,
+			**/*DTO.java,
+			**/*Request.java,
+			**/*Response.java,
+			**/*Configuration.java,
+			**/ch/keepcalm/foo/bar/**/*,
+			**/ch/keepcalm/foo/baz/**/*,
+			**/ch/qiminfo/librairy/config/**/*,
+			**/ch/qiminfo/librairy/db/**/*
+		</code.coverage.exclusions>
+		<aggregate.report.dir>target/site/jacoco-aggregate/jacoco.xml</aggregate.report.dir>
 	</properties>
 
 
@@ -89,12 +107,6 @@
 			<artifactId>kotlin-stdlib-jdk8</artifactId>
 		</dependency>
 
-		<!-- Sonar -->
-	<!--	<dependency>
-			<groupId>org.sonarsource.scanner.maven</groupId>
-			<artifactId>sonar-maven-plugin</artifactId>
-			<version>${sonar-maven-plugin.version}</version>
-		</dependency>-->
 
 		<!-- TEST -->
 		<dependency>
@@ -140,6 +152,28 @@
 
 
 	<build>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${sonar.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${surefire.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+
 		<sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
 		<testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
 		<plugins>
@@ -175,28 +209,30 @@
 				</executions>
 			</plugin>
 
-			<!-- jacoco -->
 			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco-maven-plugin.version}</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.version}</version>
 				<executions>
 					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<configuration>
+							<configLocation>checkstyle.xml</configLocation>
+							<encoding>${project.build.sourceEncoding}</encoding>
+							<suppressionsLocation>suppressions.xml</suppressionsLocation>
+							<consoleOutput>true</consoleOutput>
+							<failsOnError>false</failsOnError>
+						</configuration>
 						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
+							<goal>check</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
+
 
 	<profiles>
 		<profile>
@@ -208,6 +244,61 @@
 					<url>https://maven.pkg.github.com/marzelwidmer/kboot-jwt-spring-boot-starter</url>
 				</repository>
 			</distributionManagement>
+		</profile>
+
+		<profile>
+			<id>coverage</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>sonar</id>
+			<properties>
+				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+				<sonar.organization>marzelwidmer</sonar.organization>
+				<sonar.projectKey>marzelwidmer_kboot-jwt-spring-boot-starter</sonar.projectKey>
+				<sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+				<sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>
+				<sonar.report>${aggregate.report.dir}</sonar.report>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonarsource.scanner.maven</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sonar</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sonar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>
