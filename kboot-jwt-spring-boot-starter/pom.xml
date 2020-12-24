@@ -19,7 +19,7 @@
 		<kotlin.version>1.4.21</kotlin.version>
 		<jjwt.version>0.9.1</jjwt.version>
 		<!-- Test -->
-		<sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
+<!--		<sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>-->
 
 		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 		<hamkrest.version>1.8.0.1</hamkrest.version>
@@ -90,11 +90,11 @@
 		</dependency>
 
 		<!-- Sonar -->
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.sonarsource.scanner.maven</groupId>
 			<artifactId>sonar-maven-plugin</artifactId>
 			<version>${sonar-maven-plugin.version}</version>
-		</dependency>
+		</dependency>-->
 
 		<!-- TEST -->
 		<dependency>
