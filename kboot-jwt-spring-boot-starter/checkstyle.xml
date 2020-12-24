@@ -5,15 +5,15 @@
 <module name="Checker">
 	<module name="Translation"/>
 
-	<!-- Checks for Size Violations.                                                                   -->
+	<!-- Checks for Size Violations. -->
 	<module name="FileLength">
 		<property name="max" value="2500"/>
 	</module>
 
-	<!-- Checks for whitespace                                                                         -->
+	<!-- Checks for whitespace -->
 	<module name="FileTabCharacter"/>
 
-	<!-- Miscellaneous other checks.                                                                   -->
+	<!-- Miscellaneous other checks -->
 	<module name="RegexpSingleline">
 		<property name="format" value="\s+$"/>
 		<property name="minimum" value="0"/>
@@ -27,7 +27,7 @@
 	</module>
 
 	<module name="TreeWalker">
-		<!-- Checks no double line                                                                     -->
+		<!-- Checks no double line -->
 		<module name="EmptyLineSeparator">
 			<property name="allowNoEmptyLineBetweenFields" value="true"/>
 			<property name="allowMultipleEmptyLines" value="false"/>
@@ -37,10 +37,10 @@
 			<property name="max" value="150"/>
 		</module>
 
-		<!-- Checks for one variable declaration per line                                              -->
+		<!-- Checks for one variable declaration per line -->
 		<module name="MultipleVariableDeclarations"/>
 
-		<!-- Checks for Javadoc comments.                                                              -->
+		<!-- Checks for Javadoc comments. -->
 		<module name="JavadocMethod">
 			<property name="allowMissingPropertyJavadoc" value="true"/>
 			<property name="scope" value="protected"/>
@@ -51,13 +51,13 @@
 			<property name="target" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
 		</module>
 
-		<!-- Checks that no method having zero parameters is defined using the name finalize.          -->
+		<!-- Checks that no method having zero parameters is defined using the name finalize. -->
 		<module name="NoFinalizer"/>
 
-		<!-- To have SuppressionsCommentFilter available                                               -->
+		<!-- To have SuppressionsCommentFilter available -->
 		<module name="FileContentsHolder"/>
 
-		<!-- Checks for Naming Conventions.                                                            -->
+		<!-- Checks for Naming Conventions. -->
 		<module name="ConstantName"/>
 		<module name="LocalFinalVariableName"/>
 		<module name="StaticVariableName"/>
@@ -99,7 +99,7 @@
 			<property name="ignoreName" value="true"/>
 		</module>
 
-		<!-- Checks for imports                                                                        -->
+		<!-- Checks for imports -->
 		<module name="AvoidStarImport"/>
 		<module name="IllegalImport"/>
 		<module name="RedundantImport"/>
@@ -107,7 +107,7 @@
 
 		<module name="StringLiteralEquality"/>
 
-		<!-- Checks for whitespace                                                                     -->
+		<!-- Checks for whitespace -->
 		<module name="EmptyForIteratorPad"/>
 		<module name="GenericWhitespace"/>
 		<module name="MethodParamPad"/>
@@ -122,11 +122,11 @@
 		<!-- Checks that each top-level class, interfaces or enum resides in a source file of its own. -->
 		<module name="OneTopLevelClass"/>
 
-		<!-- Modifier Checks                                                                           -->
+		<!-- Modifier Checks -->
 		<module name="ModifierOrder"/>
 		<module name="RedundantModifier"/>
 
-		<!-- Checks for blocks. You know, those {}'s                                                   -->
+		<!-- Checks for blocks. You know, those {}'s -->
 		<module name="AvoidNestedBlocks"/>
 		<module name="EmptyBlock"/>
 		<module name="NeedBraces"/>
@@ -146,7 +146,7 @@
 		<module name="SimplifyBooleanExpression"/>
 		<module name="SimplifyBooleanReturn"/>
 
-		<!-- Checks the import order                                                                   -->
+		<!-- Checks the import order -->
 		<module name="CustomImportOrder">
 			<property name="customImportOrderRules"
 					  value="STATIC###THIRD_PARTY_PACKAGE"/>
@@ -156,7 +156,7 @@
 
 		<module name="InterfaceIsType"/>
 
-		<!-- Miscellaneous other checks.                                                               -->
+		<!-- Miscellaneous other checks. -->
 		<module name="ArrayTypeStyle"/>
 		<module name="UpperEll"/>
 	</module>
