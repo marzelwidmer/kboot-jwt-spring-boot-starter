@@ -20,7 +20,8 @@
 		<jjwt.version>0.9.1</jjwt.version>
 		<!-- Test -->
 		<sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
-		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+
+		<jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
 		<hamkrest.version>1.8.0.1</hamkrest.version>
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 	</properties>

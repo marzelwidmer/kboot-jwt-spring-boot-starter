@@ -49,7 +49,16 @@ jobs:
           server-password: MAVEN_PASSWORD
 
       - name: Build package
-        run: mvn --batch-mode -file kboot-jwt-spring-boot-starter/pom.xml package -Drevision=$VERSION
+        run: mvn --batch-mode -file kboot-jwt-spring-boot-starter/pom.xml package sonar:sonar -Drevision=$VERSION
+
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
 
       - name: Publish package
         if: ${{ env.PREVIOUS_VERSION  != env.VERSION }}
@@ -59,11 +68,6 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
 
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
       - name: Changelog
