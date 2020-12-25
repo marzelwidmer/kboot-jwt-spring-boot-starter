@@ -8,7 +8,7 @@ import org.springframework.security.core.authority.AuthorityUtils.commaSeparated
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken
 
-class JwtTokenVerifier(private val config: JwtSecurityProperties) {
+class JwtTokenVerifier(private val jwtSecurityConfigurer: JwtSecurityConfigurer) {
     companion object {
         private val LOG = LoggerFactory.getLogger(JwtTokenVerifier::class.java)
         private const val AUTHORITIES_KEY = "roles"
@@ -26,7 +26,7 @@ class JwtTokenVerifier(private val config: JwtSecurityProperties) {
 
     private fun toClaims(token: String): Claims =
             Jwts.parser()
-                    .setSigningKey(config.secret)
+                    .setSigningKey(jwtSecurityConfigurer.secret)
                     .parseClaimsJws(token)
                     .body
 
@@ -57,9 +57,9 @@ class JwtTokenVerifier(private val config: JwtSecurityProperties) {
     fun validateToken(authToken: String): Boolean {
         try {
             Jwts.parser()
-                    .setSigningKey(config.secret)
-                    .requireIssuer(config.issuer)
-                    .requireAudience(config.audience)
+                    .setSigningKey(jwtSecurityConfigurer.secret)
+                    .requireIssuer(jwtSecurityConfigurer.issuer)
+                    .requireAudience(jwtSecurityConfigurer.audience)
                     .parseClaimsJws(authToken)
             return true
         } catch (e: SignatureException) {

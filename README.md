@@ -1,14 +1,27 @@
 # Kotlin Spring Boot Starter for JWT validation
 ![MasterCI](https://github.com/marzelwidmer/kboot-jwt-spring-boot-starter/workflows/MasterCI/badge.svg) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=marzelwidmer_kboot-jwt-spring-boot-starter&metric=alert_status)](https://sonarcloud.io/dashboard?id=marzelwidmer_kboot-jwt-spring-boot-starter)
 
-## application.yaml
+## Configure JWT
 ```yaml
 security:
   jwt:
     issuer: Keepcalm Auth
     audience: Keepcalm
     secret: s3cretP@ssw0rd
-
+```
+## Configure Protected EndPoints
+To override the default configuration of access of a User Token `/api` add the following configuration in you `application.yaml` file
+and also if you configure a Admin Endpoints.
+``` 
+keepcalm:
+  security:
+    endpoints:
+      admin:
+        - "/api/salary/**"
+      user:
+        - "/api/document/**"
+      unsecured:
+        - "/faketoken"
 ```
 
 ## Maven

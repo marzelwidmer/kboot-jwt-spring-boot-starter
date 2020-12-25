@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-   ch.keepcalm.security.faketoken.FakeTokenControllerAutoConfiguration 
+  ch.keepcalm.security.faketoken.FakeTokenControllerAutoConfiguration,\
+  ch.keepcalm.security.web.WebSecurityConfiguration
