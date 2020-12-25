@@ -3,8 +3,6 @@ name: Master Branch
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   test:
@@ -12,47 +10,94 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-
+      # SemVer
       - name: Semantic Version
         id: Semver
         run: |-
           chmod +x .github/semver.sh
           ./.github/semver.sh
-
+      # Setup JDK
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
+      # Maven Cache
+      - name: Cache Maven Packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2
+          restore-keys: ${{ runner.os }}-m2
+
+      # Maven Package (SkipTests)
       - name: Maven Package
         run: mvn -B clean package -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION -DskipTests
+      # Maven Verity
       - name: Maven Verify
-        run: mvn -B clean verify -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION
+        run: mvn -B verify -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION
+      # SonarCloud
+      - name: SonarCloud Scan
+        run: mvn -B -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION -Pcoverage,sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  sonar:
-    name: Test - SonarCloud Scan
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
-
-      - name: Semantic Version
-        id: Semver
-        run: |-
-          chmod +x .github/semver.sh
-          ./.github/semver.sh
-
-      - name: Set up JDK 11
+      # SetUp Artifactory
+      - name: SetUp Repository (Artifactory)
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: SonarCloud Scan
-        run: mvn -B clean verify -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION -Pcoverage,sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          server-id: azure-artifactory
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      # Publish Artifactory
+      - name: Publish Package (Artifactory)
+        if: ${{ env.PREVIOUS_VERSION  != env.VERSION }}
+        run: mvn --batch-mode -file kboot-jwt-spring-boot-starter/pom.xml deploy -Drevision=$VERSION-SNAPSHOT -Dmaven.test.skip=true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+
+      # SetUp GitHub
+      - name: Set Up Apache Maven GitHub Packages
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          server-id: github
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      # Publish GitHup
+      - name: Publish Package (GitHub Packages)
+        if: ${{ env.PREVIOUS_VERSION  != env.VERSION }}
+        run: mvn --batch-mode -file kboot-jwt-spring-boot-starter/pom.xml deploy -Drevision=$VERSION -Pgithub
+        env:
+          MAVEN_USERNAME: marzelwidmer
+          MAVEN_PASSWORD: ${{secrets.GITHUB_TOKEN}}
+
+      # GtHub Changelog
+      - name: GitHub Changelog
+        if: ${{ env.PREVIOUS_VERSION  != env.VERSION }}
+        id: Changelog
+        uses: scottbrenner/generate-changelog-action@master
+        env:
+          REPO: ${{ github.repository }}
+      # GtHub Release
+      - name: GitHub Release
+        if: ${{ env.PREVIOUS_VERSION  != env.VERSION }}
+        id: CreateRelease
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ env.VERSION }}
+          release_name: Release ${{ env.VERSION }}
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+

@@ -12,12 +12,3 @@ class DemoApplication
 fun main(args: Array<String>) {
     runApplication<DemoApplication>(*args)
 }
-//
-//@RestController
-//class FakeTokenController() {
-//
-//    @GetMapping("/whoami")
-//    fun me(principal: Principal): Principal {
-//        return principal
-//    }
-//}

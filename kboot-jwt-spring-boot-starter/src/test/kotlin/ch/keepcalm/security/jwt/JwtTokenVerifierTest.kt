@@ -18,9 +18,9 @@ class JwtTokenVerifierTest {
 
     @BeforeAll
     fun setup() {
-        val jwtProperties = JwtSecurityProperties()
+        val jwtProperties = JwtSecurityConfigurer()
         jwtProperties.secret = JWT_TOKEN_SECRET
-        jwtTokenVerifier = JwtTokenVerifier(config = jwtProperties)
+        jwtTokenVerifier = JwtTokenVerifier(jwtProperties)
     }
 
     @Test
