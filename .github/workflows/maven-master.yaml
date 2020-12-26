@@ -37,13 +37,13 @@ jobs:
 
       # Maven Package (SkipTests)
       - name: Maven Package
-        run: mvn -B clean package -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION -DskipTests
+        run: mvn -B -f kboot-jwt-spring-boot-starter/pom.xml clean package -Drevision=$VERSION -DskipTests
       # Maven Verity
       - name: Maven Verify
-        run: mvn -B verify -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION
+        run: mvn -B -f kboot-jwt-spring-boot-starter/pom.xml verify -Drevision=$VERSION
       # SonarCloud
       - name: SonarCloud Scan
-        run: mvn -B -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION -Pcoverage,sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn -B -f kboot-jwt-spring-boot-starter/pom.xml verify -Drevision=$VERSION -Pcoverage,sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
