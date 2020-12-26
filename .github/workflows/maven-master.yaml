@@ -134,7 +134,7 @@ jobs:
           server-id: github
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-      # Publish GitHup
+      # Publish GitHub
       - name: Publish Package (GitHub Packages)
         if: ${{ env.PREVIOUS_VERSION  != env.VERSION }}
         run: mvn --batch-mode -file kboot-jwt-spring-boot-starter/pom.xml deploy -Drevision=$VERSION -Pgithub
