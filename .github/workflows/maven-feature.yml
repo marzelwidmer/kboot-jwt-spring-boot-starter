@@ -11,7 +11,7 @@ on:
 jobs:
 
   test:
-    name: Unit Test
+    name: Test Feature and Pull Request with Unit Test
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,7 @@ jobs:
           ./.github/semver.sh
       # Maven Package (SkipTests)
       - name: Maven Package
-        run: mvn -B clean package -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION -DskipTests
+        run: mvn -B -f kboot-jwt-spring-boot-starter/pom.xml clean package -Drevision=$VERSION -DskipTests
       # Maven Verify
       - name: Maven Verify
-        run: mvn -B clean verify -f kboot-jwt-spring-boot-starter/pom.xml -Drevision=$VERSION
+        run: mvn -B -f kboot-jwt-spring-boot-starter/pom.xml clean verify -Drevision=$VERSION
