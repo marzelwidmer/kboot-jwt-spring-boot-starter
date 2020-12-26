@@ -3,16 +3,17 @@
 
 ## Configure JWT
 ```yaml
-security:
-  jwt:
-    issuer: Keepcalm Auth
-    audience: Keepcalm
-    secret: s3cretP@ssw0rd
+keepcalm:
+  security:
+    jwt:
+      issuer: Keepcalm Auth
+      audience: Keepcalm
+      secret: s3cretP@ssw0rd
 ```
 ## Configure Protected EndPoints
 To override the default configuration of access of a User Token `/api` add the following configuration in you `application.yaml` file
 and also if you configure a Admin Endpoints.
-``` 
+```yaml
 keepcalm:
   security:
     endpoints:

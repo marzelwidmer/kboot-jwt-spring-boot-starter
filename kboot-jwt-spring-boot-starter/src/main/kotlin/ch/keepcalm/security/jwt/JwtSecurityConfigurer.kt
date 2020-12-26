@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 
 @EnableConfigurationProperties(JwtSecurityConfigurer::class)
-@ConfigurationProperties("security.jwt")
+@ConfigurationProperties("keepcalm.security.jwt")
 class JwtSecurityConfigurer(var issuer: String? = "Keepcalm Auth", var audience: String? = "Keepcalm") {
     var secret: String = ""
         set(value) {
