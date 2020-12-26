@@ -100,7 +100,7 @@ jobs:
       # Publish Artifactory
       - name: Publish Package (Artifactory)
         if: ${{ env.PREVIOUS_VERSION  != env.VERSION }}
-        run: mvn --batch-mode -file kboot-jwt-spring-boot-starter/pom.xml deploy -Drevision=$VERSION-SNAPSHOT -Dmaven.test.skip=true
+        run: mvn --batch-mode -file kboot-jwt-spring-boot-starter/pom.xml deploy -Drevision=$VERSION -Dmaven.test.skip=true
         env:
           MAVEN_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}

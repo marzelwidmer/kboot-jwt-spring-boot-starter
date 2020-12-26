@@ -1,11 +1,9 @@
-security:
-  jwt:
-    issuer: Keepcalm Auth
-    audience: Keepcalm
-    secret: s3cretP@ssw0rd
-
 keepcalm:
   security:
+    jwt:
+      issuer: Keepcalm Auth
+      audience: Keepcalm
+      secret: s3cretP@ssw0rd
     endpoints:
       admin:
         - "/api/salary/**"
