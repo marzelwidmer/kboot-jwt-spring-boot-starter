@@ -1,4 +1,4 @@
-name: Feature Branch
+name: PullRequest / Feature Build
 
 on:
   push:

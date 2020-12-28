@@ -31,17 +31,18 @@
 	<dependencies>
 		<dependency>
 			<groupId>ch.keepcalm.security</groupId>
-			<artifactId>kboot-jwt-spring-boot-starter</artifactId>
-			<version>0.0.0</version>
+			<artifactId>kboot-starter-security</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
 		</dependency>
 		<!-- Test Support -->
 		<dependency>
 			<groupId>ch.keepcalm.security</groupId>
-			<artifactId>kboot-jwt-spring-boot-starter</artifactId>
-			<version>0.0.0</version>
-			<type>test-jar</type>
+			<artifactId>kboot-starter-security-test</artifactId>
+			<version>0.0.0-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
