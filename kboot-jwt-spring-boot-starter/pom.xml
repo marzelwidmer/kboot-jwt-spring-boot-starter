@@ -16,7 +16,7 @@
 	<properties>
 		<revision>0.0.0</revision>
 		<java.version>11</java.version>
-		<kotlin.version>1.4.21-2</kotlin.version>
+		<kotlin.version>1.4.30</kotlin.version>
 		<jjwt.version>0.9.1</jjwt.version>
 
 		<!-- Test -->
