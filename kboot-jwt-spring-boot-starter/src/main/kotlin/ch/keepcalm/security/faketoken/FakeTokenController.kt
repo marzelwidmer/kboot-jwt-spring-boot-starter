@@ -49,7 +49,7 @@ data class Token(
     var roles: String? = "keepcalm.user",
     var issuer: String? = "Keepcalm Auth",
     var audience: String? = "Keepcalm",
-    var secret: String = "s3cretP@ssw0rd",
+    var secret: String = "SuperSecretTestPasswordThatIsUsedOnlyForTests",
     var userEmail: String? = "joh.doe@ch.keepcalm.foo.ch.keepcalm.bar.ch",
     var expiration: Int = 3600000
 )

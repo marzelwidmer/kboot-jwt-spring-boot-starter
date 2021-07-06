@@ -16,17 +16,16 @@
 	<properties>
 		<revision>0.0.0</revision>
 		<java.version>11</java.version>
-		<kotlin.version>1.4.21-2</kotlin.version>
-		<jjwt.version>0.9.1</jjwt.version>
+		<kotlin.version>1.5.20</kotlin.version>
+		<jjwt.version>0.11.2</jjwt.version>
 
 		<!-- Test -->
 		<hamkrest.version>1.8.0.1</hamkrest.version>
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
 
-
 		<!-- plugins -->
 		<sonar.version>3.8.0.2131</sonar.version>
-		<jacoco.version>0.8.6</jacoco.version>
+		<jacoco.version>0.8.7</jacoco.version>
 
 		<surefire.version>2.22.2</surefire.version>
 		<checkstyle.version>3.0.0</checkstyle.version>
@@ -95,12 +94,24 @@
 			<scope>compile</scope>
 		</dependency>
 
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
+			<artifactId>jjwt-api</artifactId>
 			<version>${jjwt.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jjwt.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>${jjwt.version}</version>
+			<scope>runtime</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.module</groupId>

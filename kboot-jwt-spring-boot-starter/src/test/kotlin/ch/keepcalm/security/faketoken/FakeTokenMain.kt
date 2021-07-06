@@ -15,7 +15,7 @@ fun main() {
     val issuer = readLine()?.ifBlank { Token().issuer }
     println("audience : [Keepcalm]")
     val audience = readLine()?.ifBlank { Token().audience }
-    println("secret : [s3cretP@ssw0rd]")
+    println("secret : [SuperSecretTestPasswordThatIsUsedOnlyForTests]")
     val secret = readLine()?.ifBlank { Token().secret }.toString()
     println("userEmail : [joh.doe@ch.keepcalm.foo.ch.keepcalm.bar.ch]")
     val userEmail = readLine()?.ifBlank { Token().userEmail }

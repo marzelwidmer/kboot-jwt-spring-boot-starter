@@ -18,15 +18,9 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<kotlin.version>1.4.21</kotlin.version>
+		<kotlin.version>1.5.20</kotlin.version>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>azure-artifactory</id>
-			<url>http://nexusvm.cloudapp.net/artifactory/maven-public</url>
-		</repository>
-	</repositories>
 
 	<dependencies>
 		<dependency>
